@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The App Board | Attribution Analytics for Mobile Apps</title>
+  <meta name="description"
+    content="Track every dollar from ad to revenue. Connect Meta, TikTok, Google Ads, and QR Deeplinks. No SDK required. GDPR compliant. 5-min setup. One dashboard for installs, events, and revenue." />
+  <meta name="keywords"
+    content="mobile attribution, analytics, ad tracking, Meta Ads, TikTok Ads, Google Ads, QR Deeplinks, installs, revenue, dashboard, app analytics, MRR, ARR, churn, retention, GDPR, no SDK" />
+  <meta name="author" content="The App Board" />
+  <meta property="og:title" content="The App Board | Attribution Analytics for Mobile Apps" />
+  <meta property="og:description"
+    content="Track every dollar from ad to revenue. Connect Meta, TikTok, Google Ads, and QR Deeplinks. No SDK required. GDPR compliant. 5-min setup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://theappboard.com/" />
+  <meta property="og:image" content="https://theappboard.com/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The App Board | Attribution Analytics for Mobile Apps" />
+  <meta name="twitter:description"
+    content="Track every dollar from ad to revenue. Connect Meta, TikTok, Google Ads, and QR Deeplinks. No SDK required. GDPR compliant. 5-min setup." />
+  <meta name="twitter:image" content="https://theappboard.com/assets/og-image.png" />
+  <link rel="canonical" href="https://theappboard.com/" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/assets/site.webmanifest" />
+  <style>
+    /* All styles embedded - no external dependencies */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0A0A0A;
+      --surface: #111111;
+      --border: #1F1F1F;
+      --green: #00FF88;
+      --greenGlow: rgba(0, 255, 136, .30);
+      --success: #10B981;
+      --warn: #FBBF24;
+      --error: #EF4444;
+      --text: #FFFFFF;
+      --muted: #A3A3A3;
+      --caption: #666666;
+    }
+
+    html,
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    /* Utility Classes */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, .04);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .glow {
+      box-shadow: 0 0 40px rgba(0, 255, 136, .5);
+    }
+
+    .glow-soft {
+      box-shadow: 0 0 20px rgba(0, 255, 136, .2);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-weight: 700;
+      transition: all 0.12s ease;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: #04160E;
+      background: var(--green);
+      box-shadow: 0 0 40px rgba(0, 255, 136, .35);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+      box-shadow: 0 0 48px rgba(0, 255, 136, .55);
+    }
+
+    .btn-outline {
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--green);
+      box-shadow: 0 0 20px rgba(0, 255, 136, .2);
+    }
+
+    .badge {
+      font-size: 12px;
+      color: #0A0A0A;
+      background: var(--green);
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .caption {
+      color: var(--caption);
+    }
+
+    /* Navigation */
+    .nav-blur {
+      background: rgba(17, 17, 17, .6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(0, 255, 136, .3);
+    }
+
+    .nav-menu {
+      display: none;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-menu a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-menu a:hover {
+      color: white;
+    }
+
+    @media (min-width: 768px) {
+      .nav-menu {
+        display: flex;
+      }
+    }
+
+    /* Progress Bar */
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, var(--green), #7CFFC4);
+      z-index: 60;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 40px;
+    }
+
+    @media (min-width: 1024px) {
+      .hero {
+        padding: 120px 0 60px;
+      }
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid {
+        gap: 32px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.1;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .hero-green {
+      color: var(--green);
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 480px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .trust-badges {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: var(--caption);
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .check {
+      color: var(--green);
+    }
+
+    /* Dashboard Preview */
+    .dashboard-window {
+      background: #161b22;
+      border: 1px solid rgba(0, 255, 136, .3);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(0, 255, 136, .2);
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .window-controls {
+      background: #0B0F14;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .window-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .window-label {
+      margin-left: 12px;
+      font-size: 12px;
+      color: var(--caption);
+    }
+
+    .dashboard-content {
+      background: #0B0F14;
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-content {
+        padding: 12px;
+        position: relative;
+      }
+
+      /* Add scroll indicator */
+      .dashboard-content::after {
+        content: "← Scroll →";
+        position: absolute;
+        bottom: 4px;
+        right: 12px;
+        font-size: 10px;
+        color: var(--caption);
+        opacity: 0.7;
+      }
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 480px) {
+      .kpi-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .kpi-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .kpi-card {
+      background: #111;
+      border: 1px solid #1F1F1F;
+      border-radius: 8px;
+      padding: 12px;
+      min-width: 0;
+    }
+
+    @media (max-width: 480px) {
+      .kpi-card {
+        padding: 8px;
+      }
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      color: var(--caption);
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+    }
+
+    @media (max-width: 480px) {
+      .kpi-value {
+        font-size: 16px;
+      }
+    }
+
+    .kpi-value.highlight {
+      color: var(--green);
+    }
+
+    /* Dashboard Table */
+    .dashboard-table {
+      width: 100%;
+      font-size: 14px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .dashboard-table table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-table {
+        font-size: 12px;
+        margin: 0 -12px;
+        padding: 0 12px;
+      }
+
+      .dashboard-table table {
+        min-width: 500px;
+      }
+
+      /* Hide less important columns on mobile */
+      .dashboard-table th:nth-child(6),
+      .dashboard-table td:nth-child(6),
+      .dashboard-table th:nth-child(8),
+      .dashboard-table td:nth-child(8) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-table {
+        font-size: 11px;
+        margin: 0 -8px;
+        padding: 0 8px;
+      }
+
+      .dashboard-table table {
+        min-width: 350px;
+      }
+
+      /* Hide even more columns on very small screens */
+      .dashboard-table th:nth-child(4),
+      .dashboard-table td:nth-child(4),
+      .dashboard-table th:nth-child(6),
+      .dashboard-table td:nth-child(6),
+      .dashboard-table th:nth-child(7),
+      .dashboard-table td:nth-child(7),
+      .dashboard-table th:nth-child(8),
+      .dashboard-table td:nth-child(8) {
+        display: none;
+      }
+    }
+
+    .dashboard-table th {
+      text-align: left;
+      padding: 12px;
+      background: rgba(255, 255, 255, .06);
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-table th {
+        padding: 8px 6px;
+        font-size: 10px;
+      }
+    }
+
+    .dashboard-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      color: #E6F1F5;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-table td {
+        padding: 10px 6px;
+      }
+    }
+
+    .dashboard-table tr:hover td {
+      background: rgba(0, 255, 136, .05);
+    }
+
+    .dashboard-table tr.inactive {
+      display: none;
+    }
+
+    .metric-highlight {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .ltv-highlight {
+      background: rgba(0, 255, 136, .1);
+      color: var(--green);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    /* Data filter controls */
+    .data-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin: 12px 0 16px;
+    }
+
+    .data-filters input[type="date"],
+    .data-filters input[type="text"] {
+      background: #0B0F14;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .btn-apply {
+      background: #EC4899;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-apply:hover {
+      filter: brightness(1.05);
+    }
+
+    /* Subtle heat backgrounds for key cells */
+    .heat-good {
+      background: rgba(34, 197, 94, .15);
+    }
+
+    .heat-mid {
+      background: rgba(234, 179, 8, .12);
+    }
+
+    .heat-bad {
+      background: rgba(239, 68, 68, .12);
+    }
+
+    /* CEO Cockpit Styles */
+    .ceo-cockpit {
+      margin-bottom: 24px;
+    }
+
+    .cockpit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .cockpit-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .cockpit-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    .cockpit-card {
+      background: #111;
+      border: 1px solid #1F1F1F;
+      border-radius: 8px;
+      padding: 12px;
+      position: relative;
+    }
+
+    .cockpit-card.status-good {
+      border-left: 4px solid var(--green);
+    }
+
+    .cockpit-card.status-warning {
+      border-left: 4px solid var(--warn);
+    }
+
+    .cockpit-card.status-critical {
+      border-left: 4px solid var(--error);
+    }
+
+    .cockpit-value {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .cockpit-value.good {
+      color: var(--green);
+    }
+
+    .cockpit-value.warning {
+      color: var(--warn);
+    }
+
+    .cockpit-value.critical {
+      color: var(--error);
+    }
+
+    .cockpit-label {
+      font-size: 11px;
+      color: var(--caption);
+      margin-bottom: 4px;
+    }
+
+    .cockpit-trend {
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: var(--green);
+    }
+
+    .trend-down {
+      color: var(--error);
+    }
+
+    .trend-neutral {
+      color: var(--warn);
+    }
+
+    /* Enhanced Features Sections */
+    .enhanced-features {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .features-grid-enhanced {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .features-grid-enhanced {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-section {
+      background: #111;
+      border: 1px solid #1F1F1F;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .feature-section h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .feature-metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 12px;
+    }
+
+    .feature-metric:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .metric-good {
+      color: var(--green);
+    }
+
+    .metric-warning {
+      color: var(--warn);
+    }
+
+    .metric-critical {
+      color: var(--error);
+    }
+
+    /* Platform Toggles Section */
+    .platform-section {
+      padding: 48px 0;
+    }
+
+    .platform-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .platform-header h3 {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .platform-pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .toggle-pill {
+      border: 1px solid var(--border);
+      color: #EAEAEA;
+      border-radius: 999px;
+      padding: 8px 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    .toggle-pill.on {
+      border-color: var(--green);
+      box-shadow: inset 0 0 0 1px var(--green), 0 0 20px rgba(0, 255, 136, .25);
+      color: #0B1B14;
+      background: linear-gradient(180deg, var(--green), #06c874);
+    }
+
+    /* Features Grid */
+    .features {
+      padding: 64px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .feature-card {
+      padding: 24px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    /* Metrics Section */
+    .metrics-section {
+      padding: 48px 0;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .count {
+      font-variant-numeric: tabular-nums;
+      font-size: 24px;
+      font-weight: 900;
+      color: white;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .pricing h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 48px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .pricing-card {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card.popular {
+      border: 1px solid var(--green);
+      box-shadow: 0 0 40px rgba(0, 255, 136, .3);
+    }
+
+    .pricing-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .pricing-price {
+      font-size: 48px;
+      font-weight: 900;
+      margin: 16px 0;
+    }
+
+    .pricing-period {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin: 24px 0;
+      flex-grow: 1;
+    }
+
+    .pricing-features li {
+      padding: 8px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pricing-cta {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 48px 0;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .testimonial-card {
+      padding: 24px;
+    }
+
+    /* FAQ Section */
+    .faq {
+      padding: 64px 0;
+    }
+
+    .faq-container {
+      width: 80%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .faq h3 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 40px;
+      color: var(--green);
+    }
+
+    .acc-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 16px rgba(0, 255, 136, 0.07);
+      transition: box-shadow 0.2s;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .acc-item.open {
+      box-shadow: 0 4px 32px rgba(0, 255, 136, 0.13);
+      border-color: var(--green);
+    }
+
+    .acc-item button {
+      width: 100%;
+      text-align: left;
+      padding: 20px 24px 16px 24px;
+      font-weight: 700;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+      border-radius: 12px 12px 0 0;
+      outline: none;
+      position: relative;
+    }
+
+    .acc-item button:hover {
+      color: var(--green);
+      background: rgba(0, 255, 136, 0.04);
+    }
+
+    .acc-item .body {
+      display: none;
+      padding: 0 24px 20px 24px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      animation: fadeInFAQ 0.3s;
+    }
+
+    .acc-item.open .body {
+      display: block;
+    }
+
+    @keyframes fadeInFAQ {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Final CTA */
+    .final-cta {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .final-cta h3 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      font-size: 14px;
+      color: var(--caption);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 36px;
+      }
+
+      .pricing-price {
+        font-size: 36px;
+      }
+
+      .final-cta h3 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+
+  <!-- Navigation -->
+  <header class="nav-blur">
+    <div class="container">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <div class="logo-icon glass">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v18M3 12h18" stroke="#00FF88" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+          <span>The App Board</span>
+        </div>
+        <nav class="nav-menu">
+          <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Home</a>
+          <a href="#engagement">Growth Funnel</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <div>
+          <a href="#cta" class="btn btn-primary">Book Demo</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="product" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-title">
+            Track Every <span class="hero-green">Dollar</span><br />
+            From <span class="hero-green">Ad</span> to<br />
+            Revenue
+          </h1>
+          <p class="hero-subtitle">Connect all your ad platforms. Track installs, events, and revenue. Optimize with
+            real attribution data.</p>
+          <div class="hero-cta">
+            <a href="#cta" class="btn btn-primary glow">Book Demo</a>
+
+          </div>
+          <div class="trust-badges">
+            <span class="trust-badge">
+              <span class="check">✓</span> No SDK Required
+            </span>
+            <span class="trust-badge">
+              <span class="check">✓</span> GDPR Compliant
+            </span>
+            <span class="trust-badge">
+              <span class="check">✓</span> 5-min Setup
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <div class="dashboard-window">
+            <div class="window-controls">
+              <div class="window-dot" style="background: #FF5F56"></div>
+              <div class="window-dot" style="background: #FFBD2E"></div>
+              <div class="window-dot" style="background: #27C93F"></div>
+              <span class="window-label">/ dashboard preview</span>
+            </div>
+            <div class="dashboard-content">
+              <!-- CEO Cockpit Dashboard -->
+              <div class="ceo-cockpit" id="ceo-cockpit">
+                <div class="cockpit-grid">
+                  <div class="cockpit-card status-good">
+                    <div class="cockpit-label">Total Users</div>
+                    <div class="cockpit-value good" id="cockpitUsers">2,847</div>
+                    <div class="cockpit-trend trend-up">↗ +12%</div>
+                  </div>
+
+                  <div class="cockpit-card status-warning">
+                    <div class="cockpit-label">Paying Users</div>
+                    <div class="cockpit-value warning" id="cockpitPaying">284</div>
+                    <div class="cockpit-trend trend-up">↗ +8%</div>
+                  </div>
+
+                  <div class="cockpit-card status-good">
+                    <div class="cockpit-label">MRR</div>
+                    <div class="cockpit-value good" id="cockpitMRR">£18.2K</div>
+                    <div class="cockpit-trend trend-up">↗ +15%</div>
+                  </div>
+
+                  <div class="cockpit-card status-critical">
+                    <div class="cockpit-label">Avg CAC</div>
+                    <div class="cockpit-value critical" id="cockpitCAC">£84</div>
+                    <div class="cockpit-trend trend-up">↗ +5%</div>
+                  </div>
+
+                  <div class="cockpit-card status-good">
+                    <div class="cockpit-label">LTV:CAC</div>
+                    <div class="cockpit-value good" id="cockpitLTV">2.1x</div>
+                    <div class="cockpit-trend trend-up">↗ +3%</div>
+                  </div>
+
+                  <div class="cockpit-card status-warning">
+                    <div class="cockpit-label">Churn Rate</div>
+                    <div class="cockpit-value warning" id="cockpitChurn">2.8%</div>
+                    <div class="cockpit-trend trend-down">↘ -0.3%</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kpi-row" id="channel-kpis">
+                <div class="kpi-card">
+                  <div class="kpi-label">Installs</div>
+                  <div class="kpi-value" id="totalInstalls">12,480</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">Spend</div>
+                  <div class="kpi-value" id="totalSpend">$9,320</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">CPI</div>
+                  <div class="kpi-value highlight" id="totalCPI">$0.75</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">Revenue</div>
+                  <div class="kpi-value" id="totalRevenue">$18,540</div>
+                </div>
+              </div>
+
+              <div class="dashboard-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Channel</th>
+                      <th>Installs</th>
+                      <th>Spend</th>
+                      <th>CPI</th>
+                      <th>Revenue</th>
+                      <th>LTV:CAC</th>
+                      <th>Trial→Paid</th>
+                      <th>Churn</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-channel="meta-ads">
+                      <td>Meta Ads</td>
+                      <td>5,200</td>
+                      <td>$3,200</td>
+                      <td class="metric-highlight">$0.62</td>
+                      <td>$6,800</td>
+                      <td><span class="ltv-highlight">2.1x</span></td>
+                      <td class="metric-highlight">14.2%</td>
+                      <td>2.1%</td>
+                    </tr>
+                    <tr data-channel="tiktok-ads">
+                      <td>TikTok Ads</td>
+                      <td>4,100</td>
+                      <td>$2,900</td>
+                      <td class="metric-highlight">$0.71</td>
+                      <td>$5,400</td>
+                      <td><span class="ltv-highlight">1.9x</span></td>
+                      <td class="metric-highlight">12.8%</td>
+                      <td>2.5%</td>
+                    </tr>
+                    <tr data-channel="qr-deeplinks">
+                      <td>QR Deep Links</td>
+                      <td>900</td>
+                      <td>$120</td>
+                      <td class="metric-highlight">$0.13</td>
+                      <td>$1,300</td>
+                      <td><span class="ltv-highlight">10.8x</span></td>
+                      <td class="metric-highlight">28.4%</td>
+                      <td>1.2%</td>
+                    </tr>
+                    <tr data-channel="google-ads">
+                      <td>Google Ads</td>
+                      <td>1,300</td>
+                      <td>$980</td>
+                      <td class="metric-highlight">$0.75</td>
+                      <td>$1,500</td>
+                      <td><span class="ltv-highlight">1.5x</span></td>
+                      <td class="metric-highlight">11.2%</td>
+                      <td>3.1%</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Enhanced Features Dashboard -->
+              <div class="enhanced-features">
+                <div class="features-grid-enhanced">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Toggle Section -->
+  <section class="platform-section">
+    <div class="container">
+      <div class="platform-header">
+        <h3>Compare channels instantly</h3>
+        <div class="caption">Active channels: <span id="activeCount">0</span></div>
+      </div>
+      <div id="pillRow" class="platform-pills"></div>
+      <div class="caption" style="margin-top: 12px;">Toggle platforms to simulate how the dashboard changes.</div>
+    </div>
+  </section> <!-- Features Grid -->
+
+  <!-- Growth Funnel / Engagement Dashboard -->
+  <section class="platform-section" id="engagement">
+    <div class="container">
+      <h3 style="font-size:28px; font-weight:800; margin-bottom:6px;">Growth funnel dashboard</h3>
+      <p class="muted" style="margin-bottom:12px;">A high‑level overview of key performance metrics.</p>
+
+      <div class="dashboard-window">
+        <div class="window-controls">
+          <div class="window-dot" style="background:#ef4444"></div>
+          <div class="window-dot" style="background:#f59e0b"></div>
+          <div class="window-dot" style="background:#10b981"></div>
+          <span class="window-label">Funnel metrics</span>
+        </div>
+        <div class="dashboard-content">
+          <div class="dashboard-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Installs</th>
+                  <th>Spend £</th>
+                  <th>CPI £</th>
+                  <th>Revenue £</th>
+                  <th>LTV:CAC</th>
+                  <th>Profile Creation %</th>
+                  <th>Profile Complete %</th>
+                  <th>Inv. Rate Week %</th>
+                  <th>DAU/MAU</th>
+                  <th>Avg Sessions: Day 1</th>
+                  <th>Day 1 Retention %</th>
+                  <th>Day 7 Retention %</th>
+                  <th>Day 30 Retention %</th>
+                  <th>Feature Usage %</th>
+                  <th>Paid Active Users</th>
+                  <th>ARPU £</th>
+                  <th>Churn %</th>
+                  <th>Revenue Growth %</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr id="tiktok-ads" data-channel="tiktok-ads">
+                  <td>TikTok Ads</td>
+                  <td>900</td>
+                  <td>1200</td>
+                  <td>1.33</td>
+                  <td>2200</td>
+                  <td>1.8</td>
+                  <td>95</td>
+                  <td>73</td>
+                  <td>32</td>
+                  <td>27</td>
+                  <td>2.7</td>
+                  <td>28</td>
+                  <td class="heat-mid">14</td>
+                  <td class="heat-bad">9</td>
+                  <td>55</td>
+                  <td>9</td>
+                  <td>160</td>
+                  <td class="heat-bad">2.4</td>
+                  <td>22</td>
+                </tr>
+                <tr id="meta-ads" data-channel="meta-ads">
+                  <td>Meta Ads</td>
+                  <td>600</td>
+                  <td>950</td>
+                  <td>1.58</td>
+                  <td>1500</td>
+                  <td>1.6</td>
+                  <td>94</td>
+                  <td class="heat-mid">71</td>
+                  <td>29</td>
+                  <td class="heat-mid">24</td>
+                  <td>2.3</td>
+                  <td>24</td>
+                  <td>15</td>
+                  <td>11</td>
+                  <td>49</td>
+                  <td>7</td>
+                  <td>100</td>
+                  <td class="heat-bad">2.2</td>
+                  <td>28</td>
+                </tr>
+                <tr id="qr-deeplinks" data-channel="qr-deeplinks">
+                  <td>QR Codes</td>
+                  <td>300</td>
+                  <td>0</td>
+                  <td>0.0</td>
+                  <td>600</td>
+                  <td>--</td>
+                  <td>92</td>
+                  <td>68</td>
+                  <td>27</td>
+                  <td>21</td>
+                  <td>2.1</td>
+                  <td>22</td>
+                  <td>13</td>
+                  <td>8</td>
+                  <td>41</td>
+                  <td>6</td>
+                  <td>80</td>
+                  <td class="heat-bad">2.0</td>
+                  <td>31</td>
+                </tr>
+                <tr id="google-ads" data-channel="google-ads">
+                  <td>Google Ads</td>
+                  <td>1300</td>
+                  <td>980</td>
+                  <td>0.75</td>
+                  <td>1500</td>
+                  <td>1.5</td>
+                  <td>93</td>
+                  <td>70</td>
+                  <td>30</td>
+                  <td>23</td>
+                  <td>2.2</td>
+                  <td>23</td>
+                  <td>14</td>
+                  <td>10</td>
+                  <td>48</td>
+                  <td>6</td>
+                  <td>90</td>
+                  <td>2.3</td>
+                  <td>27</td>
+                </tr>
+
+                <tr>
+                  <td><strong>TOTAL</strong></td>
+                  <td id="sum-installs">2000</td>
+                  <td id="sum-spend">2550</td>
+                  <td id="sum-cpi">1.4</td>
+                  <td id="sum-revenue">5000</td>
+                  <td>2.0</td>
+                  <td>95</td>
+                  <td>72</td>
+                  <td>31</td>
+                  <td>26</td>
+                  <td>2.6</td>
+                  <td class="heat-good">26</td>
+                  <td class="heat-mid">15</td>
+                  <td>10</td>
+                  <td>52</td>
+                  <td>8</td>
+                  <td>380</td>
+                  <td class="heat-good">2.7</td>
+                  <td>24</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Socials Dashboard -->
+      <div style="margin-top:28px;" id="socials-dashboard">
+        <h3 style="font-size:22px; font-weight:800; margin:18px 0 6px;">Socials Dashboard</h3>
+
+        <div class="dashboard-window">
+          <div class="window-controls">
+            <div class="window-dot" style="background:#ef4444"></div>
+            <div class="window-dot" style="background:#f59e0b"></div>
+            <div class="window-dot" style="background:#10b981"></div>
+            <span class="window-label">Socials metrics</span>
+          </div>
+          <div class="dashboard-content">
+            <div class="dashboard-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Platform</th>
+                    <th>New Followers</th>
+                    <th>Views</th>
+                    <th>Avg Watch Time</th>
+                    <th>Skip Rate</th>
+                    <th>Likes</th>
+                    <th>Comments</th>
+                    <th>Link in Bio Clicks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Instagram</td>
+                    <td>12,500</td>
+                    <td>80,200</td>
+                    <td>32s</td>
+                    <td>15%</td>
+                    <td>5,100</td>
+                    <td>450</td>
+                    <td>1,200</td>
+                  </tr>
+                  <tr>
+                    <td>TikTok</td>
+                    <td>25,800</td>
+                    <td>150,500</td>
+                    <td>18s</td>
+                    <td>28%</td>
+                    <td>15,800</td>
+                    <td>1,200</td>
+                    <td>3,400</td>
+                  </tr>
+                  <tr>
+                    <td>YouTube</td>
+                    <td>8,900</td>
+                    <td>67,100</td>
+                    <td>2m 45s</td>
+                    <td>8%</td>
+                    <td>4,500</td>
+                    <td>850</td>
+                    <td>900</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="features" class="features">
+    <div class="container">
+      <div class="features-grid">
+        <a href="#ceo-cockpit" class="card feature-card glow-soft" style="text-decoration:none;color:inherit;">
+          <h3>CEO Cockpit Dashboard</h3>
+          <p class="muted">Executive summary with traffic light alerts for instant health checks.</p>
+        </a>
+        <a href="#engagement" class="card feature-card glow-soft" style="text-decoration:none;color:inherit;">
+          <h3>Revenue & Finance Tracking</h3>
+          <p class="muted">MRR, ARR, churn rates, trial conversion, and ARPPU metrics.</p>
+        </a>
+        <a href="#faq" class="card feature-card glow-soft" style="text-decoration:none;color:inherit;">
+          <h3>Support & Sentiment</h3>
+          <p class="muted">NPS scores, app store ratings, support tickets, and user sentiment.</p>
+        </a>
+        <a href="#features" class="card feature-card glow-soft" style="text-decoration:none;color:inherit;">
+          <h3>Tech Health Monitoring</h3>
+          <p class="muted">Crash-free sessions, API uptime, error rates, and performance metrics.</p>
+        </a>
+        <a href="#engagement" class="card feature-card glow-soft" style="text-decoration:none;color:inherit;">
+          <h3>Smart Deeplinks</h3>
+          <p class="muted">QR codes & deeplinks with attribution.</p>
+        </a>
+        <a href="#faq" class="card feature-card glow-soft" style="text-decoration:none;color:inherit;">
+          <h3>Automated Alerts</h3>
+          <p class="muted">Anomaly detection & Slack notifications.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics -->
+  <section class="metrics-section">
+    <div class="container">
+      <div class="metrics-grid">
+        <div class="kpi">
+          <div class="caption">Installs Tracked</div>
+          <div class="count" data-target="2300000">0</div>
+        </div>
+        <div class="kpi">
+          <div class="caption">Revenue Attributed</div>
+          <div class="count" data-target="4200000">0</div>
+        </div>
+        <div class="kpi">
+          <div class="caption">Active Apps</div>
+          <div class="count" data-target="1200">0</div>
+        </div>
+        <div class="kpi">
+          <div class="caption">API Uptime</div>
+          <div class="count">99.99%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <h2>Simple, Transparent Pricing</h2>
+      <p class="muted">All plans include unlimited events and full platform access.</p>
+      <div class="pricing-grid">
+        <div class="card pricing-card">
+          <div class="caption">Starter</div>
+          <div class="pricing-price">£699<span class="pricing-period">/mo</span></div>
+          <ul class="pricing-features">
+            <li>✓ Up to 100K events/mo</li>
+            <li>✓ 5 ad platforms</li>
+            <li>✓ Basic dashboards</li>
+            <li>✓ Email support</li>
+            <li>✓ 30-day retention</li>
+          </ul>
+          <a href="mailto:sales@theappboard.com?subject=Starter%20Plan%20Enquiry"
+            class="btn btn-primary pricing-cta">Book Now</a>
+        </div>
+        <div class="card pricing-card popular">
+          <div class="pricing-header">
+            <div class="caption">Growth</div>
+            <span class="badge">MOST POPULAR</span>
+          </div>
+          <div class="pricing-price">£1,650<span class="pricing-period">/quarter</span></div>
+          <ul class="pricing-features">
+            <li>✓ Up to 1M events/mo</li>
+            <li>✓ All ad platforms</li>
+            <li>✓ Custom dashboards</li>
+            <li>✓ Priority support</li>
+            <li>✓ Unlimited retention</li>
+          </ul>
+          <a href="mailto:sales@theappboard.com?subject=Growth%20Plan%20Enquiry"
+            class="btn btn-primary pricing-cta">Book Now</a>
+        </div>
+        <div class="card pricing-card">
+          <div class="caption">Scale</div>
+          <div class="pricing-price">£4,999<span class="pricing-period">/year</span></div>
+          <ul class="pricing-features">
+            <li>✓ Unlimited events</li>
+            <li>✓ All ad platforms</li>
+            <li>✓ White-label option</li>
+            <li>✓ Dedicated CSM</li>
+            <li>✓ Unlimited retention</li>
+          </ul>
+          <a href="mailto:sales@theappboard.com?subject=Scale%20Plan%20Enquiry" class="btn btn-primary pricing-cta">Book
+            Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="testimonials">
+    <h2 id="faq"
+      style="text-align:center;font-size:2.2rem;font-weight:900;margin-bottom:36px;color:white;letter-spacing:-1px;">
+      Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <!-- <div class="acc-item">
+        <button type="button">Is there a free trial?</button>
+        <div class="body">Yes, a 14-day free trial is available. No credit card required.</div>
+      </div> -->
+      <div class="acc-item">
+        <button type="button">Is it GDPR compliant?</button>
+        <div class="body">Yes, The App Board is fully GDPR compliant and does not require an SDK for attribution.
+        </div>
+      </div>
+      <div class="acc-item">
+        <button type="button">How do I track installs and revenue?</button>
+        <div class="body">Connect your ad platforms and view installs, events, and revenue in one dashboard.</div>
+      </div>
+      <div class="acc-item">
+        <button type="button">Which ad platforms are supported?</button>
+        <div class="body">Meta Ads, TikTok Ads, Google Ads, and QR Deeplinks are supported out of the box.</div>
+      </div>
+      <div class="acc-item">
+        <button type="button">How do I get started?</button>
+        <div class="body">Click “Book Demo” or start your free trial. No credit card required and setup takes 5
+          minutes.</div>
+      </div>
+      <div class="acc-item">
+        <button type="button">What metrics can I track?</button>
+        <div class="body">Track installs, spend, CPI, revenue, LTV:CAC, trial conversion, churn, retention, and more.
+        </div>
+      </div>
+      <div class="acc-item">
+        <button type="button">Is support available?</button>
+        <div class="body">Yes, all plans include support. Growth and Scale plans offer priority support and dedicated
+          CSM.</div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section id="cta" class="final-cta">
+    <div class="container">
+      <h3>Stop Guessing. Start Growing.</h3>
+      <p class="muted" style="margin: 12px 0 24px;">Join 1,200+ apps tracking £4M+ in attributed revenue</p>
+      <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 12px;">
+        <a href="#" class="btn btn-primary glow">Book Demo</a>
+      </div>
+      <div class="caption">No credit card required • Setup in 5 minutes</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <!-- Company Info -->
+        <div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div class="logo-icon glass">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v18M3 12h18" stroke="#00FF88" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </div>
+            <span style="font-weight: 600; font-size: 18px;">The App Board</span>
+          </div>
+          <p style="color: var(--muted); font-size: 14px; line-height: 1.5;text-align: left;width:60%;">
+            The complete attribution analytics platform for mobile apps. Track every dollar from ad to revenue.
+          </p>
+        </div>
+
+
+
+        <!-- Legal Links -->
+        <div>
+          <div style="display: flex; flex-direction: row; gap: 16px; flex-wrap: wrap;">
+            <a href="privacy-policy.html"
+              style="color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s;"
+              onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a>
+            <a href="terms-of-service.html"
+              style="color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s;"
+              onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--muted)'">Terms of Service</a>
+            <a href="refund-policy.html"
+              style="color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s;"
+              onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--muted)'">Refund Policy</a>
+            <a href="gdpr-compliance.html"
+              style="color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s;"
+              onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--muted)'">GDPR Compliance</a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div style="text-align: center; padding-top: 32px; border-top: 1px solid var(--border); color: var(--caption);">
+        © <span id="yy"></span> The App Board. All rights reserved.
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('yy').textContent = new Date().getFullYear();
+
+    // Progress bar
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      progress.style.width = scrolled + '%';
+    });
+
+    // Channel data with associated table rows
+    const channelData = {
+      'Meta Ads': { row: 'meta-ads', installs: 5200, spend: 3200, revenue: 6800 },
+      'TikTok Ads': { row: 'tiktok-ads', installs: 4100, spend: 2900, revenue: 5400 },
+      'Google Ads': { row: 'google-ads', installs: 1300, spend: 980, revenue: 1500 },
+      'QR Deeplinks': { row: 'qr-deeplinks', installs: 900, spend: 120, revenue: 1300 }
+    };
+
+    // Toggle pills + active count
+    const platforms = [
+      'Meta Ads', 'TikTok Ads', 'Google Ads', 'QR Deeplinks'
+    ].map(label => ({ label, on: true }));
+
+    const pillRow = document.getElementById('pillRow');
+    const activeCount = document.getElementById('activeCount');
+
+    function updateDashboard() {
+      let totalInstalls = 0;
+      let totalSpend = 0;
+      let totalRevenue = 0;
+
+      // Update table rows visibility
+      platforms.forEach(p => {
+        const data = channelData[p.label];
+        if (data && data.row) {
+          const row = document.querySelector(`tr[data-channel="${data.row}"]`);
+          if (row) {
+            if (p.on) {
+              row.classList.remove('inactive');
+            } else {
+              row.classList.add('inactive');
+            }
+          }
+        }
+
+        // Calculate totals for active channels
+        if (p.on && data) {
+          totalInstalls += data.installs;
+          totalSpend += data.spend;
+          totalRevenue += data.revenue;
+        }
+      });
+
+      // Calculate CPI
+      const cpi = totalInstalls > 0 ? totalSpend / totalInstalls : 0;
+
+      // Update KPI cards
+      document.getElementById('totalInstalls').textContent = totalInstalls.toLocaleString();
+      document.getElementById('totalSpend').textContent = '$' + totalSpend.toLocaleString();
+      document.getElementById('totalRevenue').textContent = '$' + totalRevenue.toLocaleString();
+      document.getElementById('totalCPI').textContent = '$' + cpi.toFixed(2);
+
+      // Mirror into funnel TOTAL row if available
+      const sumInst = document.getElementById('sum-installs');
+      const sumSpend = document.getElementById('sum-spend');
+      const sumRev = document.getElementById('sum-revenue');
+      const sumCpi = document.getElementById('sum-cpi');
+      if (sumInst) sumInst.textContent = totalInstalls.toLocaleString();
+      if (sumSpend) sumSpend.textContent = totalSpend.toLocaleString();
+      if (sumRev) sumRev.textContent = totalRevenue.toLocaleString();
+      if (sumCpi) sumCpi.textContent = (totalInstalls ? (totalSpend / totalInstalls) : 0).toFixed(1);
+    }
+
+    function renderPills() {
+      pillRow.innerHTML = '';
+      platforms.forEach((p, idx) => {
+        const b = document.createElement('button');
+        b.className = 'toggle-pill ' + (p.on ? 'on' : '');
+        b.textContent = (p.on ? '✓ ' : '✕ ') + p.label;
+        b.onclick = () => {
+          p.on = !p.on;
+          renderPills();
+          updateDashboard();
+        };
+        pillRow.appendChild(b);
+      });
+      activeCount.textContent = platforms.filter(p => p.on).length;
+    }
+
+    // Initialize
+    renderPills();
+    updateDashboard();
+
+    // FAQ accordion
+    document.querySelectorAll('.acc-item button').forEach(btn => {
+      btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
+    });
+
+    // Count-up metrics when in view
+    const counters = document.querySelectorAll('.count');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = +el.dataset.target;
+          if (!target) return;
+          let cur = 0;
+          const step = Math.max(1, Math.floor(target / 120));
+          const fmt = (n) => target > 10000 ? n.toLocaleString() + '+' : n.toLocaleString();
+          const t = setInterval(() => {
+            cur += step;
+            if (cur >= target) {
+              cur = target;
+              clearInterval(t);
+            }
+            el.textContent = fmt(cur);
+          }, 16);
+          io.unobserve(el);
+        }
+      })
+    }, { threshold: .3 });
+    counters.forEach(c => io.observe(c));
+  </script>
+</body>
+
+</html>

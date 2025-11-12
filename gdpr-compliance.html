@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GDPR-Compliance (UK)</title>
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --surface: #111111;
+            --border: #1F1F1F;
+            --green: #00FF88;
+            --text: #FFFFFF;
+            --muted: #A3A3A3;
+            --caption: #666666;
+        }
+
+        html,
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 64px 24px;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            font-weight: 900;
+            margin-bottom: 24px;
+            color: var(--green);
+        }
+
+        h2,
+        h3 {
+            color: var(--text);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+        }
+
+        ul,
+        ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a {
+            color: var(--green);
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .caption {
+            color: var(--caption);
+            font-size: 14px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 0 40px rgba(0, 255, 136, .10);
+        }
+
+        code,
+        pre {
+            background: #222;
+            color: #00FF88;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 24px 8px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container card">
+        <h1>GDPR-Compliance (UK) — PRD Section</h1>
+        <h2>Scope &amp; Roles</h2>
+        <p>We act as <strong>controller</strong> for customer/admin data in the app (accounts, billing, support) and as
+            <strong>processor</strong> for customers’ end-user analytics/events, processing only under their
+            instructions and DPA. (<a
+                href="https://ico.org.uk/for-organisations/data-protection-and-the-eu/data-protection-and-the-eu-in-detail/the-uk-gdpr/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>)</p>
+
+        <h2>Lawful Bases (Article 6)</h2>
+        <ul>
+            <li><strong>Contract</strong>: core service delivery, account management, billing.</li>
+            <li><strong>Legitimate Interests</strong>: service security, fraud prevention, product diagnostics (document
+                LIA).</li>
+            <li><strong>Consent</strong>: direct marketing emails; any non-essential tracking on public site.<br>Only
+                one lawful basis is chosen per purpose and recorded. (<a
+                    href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/?utm_source=chatgpt.com"
+                    target="_blank">Information Commissioner's Office</a>)</li>
+        </ul>
+
+        <h2>Data Protection Principles</h2>
+        <p>We design and operate to the seven principles: lawfulness/fairness/transparency; purpose limitation; data
+            minimisation; accuracy; storage limitation; integrity &amp; confidentiality; accountability. Engineering and
+            policy controls are mapped to each principle. (<a
+                href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>)</p>
+
+        <h2>Data Subject Rights Operations</h2>
+        <p>We provide workflows to fulfil UK GDPR rights: to be informed, access, rectification, erasure, restriction,
+            portability, objection, and rights related to automated decision-making. SLA: acknowledge within 7 days,
+            complete within 30 days; processors assist controllers. (<a
+                href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>)</p>
+
+        <h2>Processor Contract (Article 28) &amp; Sub-processors</h2>
+        <p>Our <strong>DPA</strong> includes Article 28 clauses: process only on documented instructions;
+            confidentiality; security measures; assist with rights/DPIA/breach; sub-processor controls; deletion/return
+            on termination; audits. Sub-processor list is published and kept current. (<a
+                href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/contracts-and-liabilities-between-controllers-and-processors-multi/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>, <a
+                href="https://www.gov.uk/government/publications/accessing-ukhsa-protected-data/approval-standards-and-guidelines-engaging-a-data-processor?utm_source=chatgpt.com"
+                target="_blank">GOV.UK</a>)</p>
+
+        <h2>Security of Processing (Article 32)</h2>
+        <p>Risk-based technical/organisational measures: encryption in transit/at rest, access control/least privilege,
+            logging &amp; monitoring, vulnerability management, backup &amp; DR, regular testing of controls. (<a
+                href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/security/a-guide-to-data-security/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>, <a
+                href="https://gdpr-info.eu/art-32-gdpr/?utm_source=chatgpt.com" target="_blank">gdpr-info.eu</a>)</p>
+
+        <h2>DPIA (Data Protection Impact Assessment)</h2>
+        <p>We run a DPIA for any processing likely to pose <strong>high risk</strong> (e.g., large-scale tracking, new
+            profiling). DPIAs are also good practice for major product changes and are reviewed before launch. (<a
+                href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/guide-to-accountability-and-governance/data-protection-impact-assessments/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>)</p>
+
+        <h2>International Transfers (UK)</h2>
+        <p>Where UK personal data leaves the UK, we use approved transfer tools: <strong>UK IDTA</strong> or the
+            <strong>UK Addendum</strong> to EU SCCs, plus a transfer risk assessment. (<a
+                href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/international-transfers/international-data-transfer-agreement-and-guidance/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>)</p>
+
+        <h2>Personal Data Breach Response</h2>
+        <p>We maintain a breach runbook and register. Notifiable breaches are reported to the ICO <strong>within 72
+                hours</strong> of awareness; where there’s high risk to individuals, we notify them without undue delay.
+            (<a href="https://ico.org.uk/for-organisations/report-a-breach/personal-data-breach/personal-data-breaches-a-guide/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>, <a
+                href="https://gdpr-info.eu/art-33-gdpr/?utm_source=chatgpt.com" target="_blank">gdpr-info.eu</a>)</p>
+
+        <h2>Accountability &amp; Records</h2>
+        <p>We maintain a <strong>ROPA</strong> (record of processing activities), link it to lawful bases, retention,
+            security measures, and DPIAs, and review it regularly. (<a
+                href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/accountability-framework/records-of-processing-and-lawful-basis/record-of-processing-activities-ropa/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>)</p>
+
+        <h2>DPO (if required)</h2>
+        <p>We will appoint a <strong>Data Protection Officer</strong> if legally triggered (public authority;
+            large-scale regular/systematic monitoring; or large-scale special-category/criminal-offence data). Otherwise
+            we document why a DPO isn’t required and name a privacy lead. (<a
+                href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/guide-to-accountability-and-governance/data-protection-officers/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>)</p>
+
+        <h2>Retention &amp; Deletion</h2>
+        <p>Default retention schedules are documented per data class in line with storage-limitation; data is deleted or
+            anonymised at end of retention or contract, with verified deletion for processor data. (<a
+                href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/?utm_source=chatgpt.com"
+                target="_blank">Information Commissioner's Office</a>)</p>
+
+        <hr />
+        <h2>Deliverables checklist (for build &amp; sign-off)</h2>
+        <ul>
+            <li>✔ DPA signed + sub-processor list live</li>
+            <li>✔ ROPA completed and linked to features in this PRD</li>
+            <li>✔ LIA(s) for legitimate-interest purposes</li>
+            <li>✔ DPIA screen completed (if high-risk), with mitigations tracked</li>
+            <li>✔ Security controls mapped to Art. 32; encryption verified</li>
+            <li>✔ Rights handling runbooks + admin tooling (export, delete, restrict)</li>
+            <li>✔ Breach runbook tested (table-top), 72-hour timer in playbook</li>
+            <li>✔ Transfer tool in place for any UK-outbound processing (IDTA/Addendum)</li>
+            <li>✔ Privacy Notice published and consistent with the above</li>
+        </ul>
+        <div class="muted" style="margin-top: 24px;">
+            If you want, I can tailor this to your exact data flows (what events you collect, hosting region, specific
+            sub-processors) and drop it into the canvas as a compliance appendix.
+        </div>
+    </div>
+</body>
+
+</html>
